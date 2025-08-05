@@ -203,3 +203,19 @@ This project is proudly sponsored by:
 ## Version History 📋
 
 See [CHANGELOG.md](CHANGELOG.md) for updates and version history.
+
+## Quick restore on a new machine
+
+```bash
+git clone https://github.com/alexsix6/mcp-bigquery-server-intelligent.git
+cd mcp-bigquery-server-intelligent
+npm ci
+npm run build
+
+### Credentials (not versioned)
+
+Place your Service Account JSON here:
+.credentials/mcp-bigquery-prod.json
+Then export in your shell:
+export GOOGLE_APPLICATION_CREDENTIALS="$PWD/.credentials/mcp-bigquery-prod.json"
+.credentials/ is in .gitignore — never commit credentials.
