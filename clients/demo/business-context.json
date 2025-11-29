@@ -1,0 +1,344 @@
+{
+  "clientName": "Auto-Generated: cognitivedsai-herramientas",
+  "projectId": "cognitivedsai-herramientas",
+  "industry": "seguridad",
+  "language": "es",
+  "queryTemplates": {
+    "últimos camaras": {
+      "description": "Últimos registros de camaras",
+      "sql": "SELECT dias_almac, mes_almac, canal, zona_cctv, nombre_camara FROM `cognitivedsai-herramientas.Seguridad_data.Camaras` ORDER BY dias_almac DESC LIMIT 50",
+      "tags": [
+        "camaras",
+        "recientes"
+      ]
+    },
+    "camaras por canal": {
+      "description": "Distribución de camaras por canal",
+      "sql": "SELECT canal, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.Camaras` GROUP BY canal ORDER BY total DESC",
+      "tags": [
+        "camaras",
+        "distribución",
+        "canal"
+      ]
+    },
+    "totales camaras": {
+      "description": "Totales de camaras por canal",
+      "sql": "SELECT canal, SUM(nvr_dvr) as total, COUNT(*) as cantidad FROM `cognitivedsai-herramientas.Seguridad_data.Camaras` GROUP BY canal ORDER BY total DESC",
+      "tags": [
+        "camaras",
+        "totales",
+        "agregación"
+      ]
+    },
+    "top camaras": {
+      "description": "Top 10 por cantidad de camaras",
+      "sql": "SELECT nombre_camara, canal, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.Camaras` GROUP BY nombre_camara, canal ORDER BY total DESC LIMIT 10",
+      "tags": [
+        "camaras",
+        "ranking",
+        "top"
+      ]
+    },
+    "resumen camaras": {
+      "description": "Resumen general de camaras",
+      "sql": "SELECT COUNT(*) as total_registros, COUNT(DISTINCT canal) as tipos_canal, COUNT(DISTINCT zona_cctv) as tipos_zona_cctv, SUM(nvr_dvr) as total_nvr_dvr, AVG(nvr_dvr) as promedio_nvr_dvr FROM `cognitivedsai-herramientas.Seguridad_data.Camaras`",
+      "tags": [
+        "camaras",
+        "resumen",
+        "overview"
+      ]
+    },
+    "últimos seleccion": {
+      "description": "Últimos registros de seleccion",
+      "sql": "SELECT candidato, fecha_inicio, fecha_ingreso, categoria_cierre, area, estatus, descripcion, nombre_reemplazo FROM `cognitivedsai-herramientas.Seguridad_data.Seleccion` ORDER BY fecha_inicio DESC LIMIT 50",
+      "tags": [
+        "seleccion",
+        "recientes"
+      ]
+    },
+    "seleccion del mes": {
+      "description": "seleccion del mes actual",
+      "sql": "SELECT candidato, fecha_inicio, fecha_ingreso, categoria_cierre, area, estatus, descripcion, nombre_reemplazo FROM `cognitivedsai-herramientas.Seguridad_data.Seleccion` WHERE fecha_inicio >= DATE_TRUNC(CURRENT_DATE(), MONTH) ORDER BY fecha_inicio DESC LIMIT 100",
+      "tags": [
+        "seleccion",
+        "mensual"
+      ]
+    },
+    "seleccion por categoria cierre": {
+      "description": "Distribución de seleccion por categoria cierre",
+      "sql": "SELECT categoria_cierre, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.Seleccion` GROUP BY categoria_cierre ORDER BY total DESC",
+      "tags": [
+        "seleccion",
+        "distribución",
+        "categoria cierre"
+      ]
+    },
+    "totales seleccion": {
+      "description": "Totales de seleccion por categoria cierre",
+      "sql": "SELECT categoria_cierre, SUM(proceso_ingreso) as total, COUNT(*) as cantidad FROM `cognitivedsai-herramientas.Seguridad_data.Seleccion` GROUP BY categoria_cierre ORDER BY total DESC",
+      "tags": [
+        "seleccion",
+        "totales",
+        "agregación"
+      ]
+    },
+    "top seleccion": {
+      "description": "Top 10 por cantidad de seleccion",
+      "sql": "SELECT nombre_reemplazo, categoria_cierre, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.Seleccion` GROUP BY nombre_reemplazo, categoria_cierre ORDER BY total DESC LIMIT 10",
+      "tags": [
+        "seleccion",
+        "ranking",
+        "top"
+      ]
+    },
+    "resumen seleccion": {
+      "description": "Resumen general de seleccion",
+      "sql": "SELECT COUNT(*) as total_registros, COUNT(DISTINCT candidato) as candidato_unicos, COUNT(DISTINCT categoria_cierre) as tipos_categoria_cierre, COUNT(DISTINCT area) as tipos_area, SUM(proceso_ingreso) as total_proceso_ingreso, AVG(proceso_ingreso) as promedio_proceso_ingreso, SUM(ingreso) as total_ingreso, AVG(ingreso) as promedio_ingreso FROM `cognitivedsai-herramientas.Seguridad_data.Seleccion`",
+      "tags": [
+        "seleccion",
+        "resumen",
+        "overview"
+      ]
+    },
+    "últimos tolerancia": {
+      "description": "Últimos registros de tolerancia",
+      "sql": "SELECT id_turno, peso_salida, fecha, mes, descripcion FROM `cognitivedsai-herramientas.Seguridad_data.Tolerancia` ORDER BY fecha DESC LIMIT 50",
+      "tags": [
+        "tolerancia",
+        "recientes"
+      ]
+    },
+    "tolerancia del mes": {
+      "description": "tolerancia del mes actual",
+      "sql": "SELECT id_turno, peso_salida, fecha, mes, descripcion FROM `cognitivedsai-herramientas.Seguridad_data.Tolerancia` WHERE anio = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY fecha DESC LIMIT 100",
+      "tags": [
+        "tolerancia",
+        "mensual"
+      ]
+    },
+    "resumen tolerancia": {
+      "description": "Resumen general de tolerancia",
+      "sql": "SELECT COUNT(*) as total_registros, COUNT(DISTINCT id_turno) as id_turno_unicos, SUM(peso_entrada) as total_peso_entrada, AVG(peso_entrada) as promedio_peso_entrada, SUM(peso_neto) as total_peso_neto, AVG(peso_neto) as promedio_peso_neto FROM `cognitivedsai-herramientas.Seguridad_data.Tolerancia`",
+      "tags": [
+        "tolerancia",
+        "resumen",
+        "overview"
+      ]
+    },
+    "últimos eventoszai": {
+      "description": "Últimos registros de eventoszai",
+      "sql": "SELECT id_evento, fecha, hora, area, macro_area, zona_cctv, nombre_colaborador, descripcion_evento FROM `cognitivedsai-herramientas.Seguridad_data.eventoszai` ORDER BY fecha DESC LIMIT 50",
+      "tags": [
+        "eventoszai",
+        "recientes"
+      ]
+    },
+    "eventoszai del mes": {
+      "description": "eventoszai del mes actual",
+      "sql": "SELECT id_evento, fecha, hora, area, macro_area, zona_cctv, nombre_colaborador, descripcion_evento FROM `cognitivedsai-herramientas.Seguridad_data.eventoszai` WHERE anio_evento = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY fecha DESC LIMIT 100",
+      "tags": [
+        "eventoszai",
+        "mensual"
+      ]
+    },
+    "eventoszai por area": {
+      "description": "Distribución de eventoszai por area",
+      "sql": "SELECT area, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.eventoszai` GROUP BY area ORDER BY total DESC",
+      "tags": [
+        "eventoszai",
+        "distribución",
+        "area"
+      ]
+    },
+    "eventoszai críticos": {
+      "description": "eventoszai con nivel alto o crítico",
+      "sql": "SELECT id_evento, fecha, hora, area, macro_area, zona_cctv, nombre_colaborador, descripcion_evento FROM `cognitivedsai-herramientas.Seguridad_data.eventoszai` WHERE LOWER(riesgo) IN ('alto', 'crítico', 'high', 'critical', 'urgente') ORDER BY fecha DESC LIMIT 50",
+      "tags": [
+        "eventoszai",
+        "crítico",
+        "alertas"
+      ]
+    },
+    "totales eventoszai": {
+      "description": "Totales de eventoszai por area",
+      "sql": "SELECT area, SUM(casos) as total, COUNT(*) as cantidad FROM `cognitivedsai-herramientas.Seguridad_data.eventoszai` GROUP BY area ORDER BY total DESC",
+      "tags": [
+        "eventoszai",
+        "totales",
+        "agregación"
+      ]
+    },
+    "top eventoszai": {
+      "description": "Top 10 por cantidad de eventoszai",
+      "sql": "SELECT nombre_colaborador, area, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.eventoszai` GROUP BY nombre_colaborador, area ORDER BY total DESC LIMIT 10",
+      "tags": [
+        "eventoszai",
+        "ranking",
+        "top"
+      ]
+    },
+    "resumen eventoszai": {
+      "description": "Resumen general de eventoszai",
+      "sql": "SELECT COUNT(*) as total_registros, COUNT(DISTINCT id_evento) as id_evento_unicos, COUNT(DISTINCT area) as tipos_area, COUNT(DISTINCT macro_area) as tipos_macro_area, SUM(casos) as total_casos, AVG(casos) as promedio_casos, SUM(centro_de_costos) as total_centro_de_costos, AVG(centro_de_costos) as promedio_centro_de_costos FROM `cognitivedsai-herramientas.Seguridad_data.eventoszai`",
+      "tags": [
+        "eventoszai",
+        "resumen",
+        "overview"
+      ]
+    },
+    "últimos vehiculos": {
+      "description": "Últimos registros de vehiculos",
+      "sql": "SELECT id_persona, id_turno, fecha_turno_desde, hora_turno_desde, tipo_turno, estado_turno, detalle_tipo_turno, nombre, descripcion_1 FROM `cognitivedsai-herramientas.Seguridad_data.vehiculos` ORDER BY fecha_turno_desde DESC LIMIT 50",
+      "tags": [
+        "vehiculos",
+        "recientes"
+      ]
+    },
+    "vehiculos del mes": {
+      "description": "vehiculos del mes actual",
+      "sql": "SELECT id_persona, id_turno, fecha_turno_desde, hora_turno_desde, tipo_turno, estado_turno, detalle_tipo_turno, nombre, descripcion_1 FROM `cognitivedsai-herramientas.Seguridad_data.vehiculos` WHERE anio_entrada = EXTRACT(YEAR FROM CURRENT_DATE()) ORDER BY fecha_turno_desde DESC LIMIT 100",
+      "tags": [
+        "vehiculos",
+        "mensual"
+      ]
+    },
+    "vehiculos por tipo turno": {
+      "description": "Distribución de vehiculos por tipo turno",
+      "sql": "SELECT tipo_turno, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.vehiculos` GROUP BY tipo_turno ORDER BY total DESC",
+      "tags": [
+        "vehiculos",
+        "distribución",
+        "tipo turno"
+      ]
+    },
+    "totales vehiculos": {
+      "description": "Totales de vehiculos por tipo turno",
+      "sql": "SELECT tipo_turno, SUM(minutos) as total, COUNT(*) as cantidad FROM `cognitivedsai-herramientas.Seguridad_data.vehiculos` GROUP BY tipo_turno ORDER BY total DESC",
+      "tags": [
+        "vehiculos",
+        "totales",
+        "agregación"
+      ]
+    },
+    "top vehiculos": {
+      "description": "Top 10 por cantidad de vehiculos",
+      "sql": "SELECT nombre, tipo_turno, COUNT(*) as total FROM `cognitivedsai-herramientas.Seguridad_data.vehiculos` GROUP BY nombre, tipo_turno ORDER BY total DESC LIMIT 10",
+      "tags": [
+        "vehiculos",
+        "ranking",
+        "top"
+      ]
+    },
+    "resumen vehiculos": {
+      "description": "Resumen general de vehiculos",
+      "sql": "SELECT COUNT(*) as total_registros, COUNT(DISTINCT id_persona) as id_persona_unicos, COUNT(DISTINCT tipo_turno) as tipos_tipo_turno, COUNT(DISTINCT estado_turno) as tipos_estado_turno, SUM(minutos) as total_minutos, AVG(minutos) as promedio_minutos, SUM(pern) as total_pern, AVG(pern) as promedio_pern FROM `cognitivedsai-herramientas.Seguridad_data.vehiculos`",
+      "tags": [
+        "vehiculos",
+        "resumen",
+        "overview"
+      ]
+    },
+    "últimos contact submissions": {
+      "description": "Últimos registros de contact submissions",
+      "sql": "SELECT id, message, created_at, area_of_interest, source_page, full_name, email FROM `cognitivedsai-herramientas.alexseis_web.contact_submissions` ORDER BY message DESC LIMIT 50",
+      "tags": [
+        "contact submissions",
+        "recientes"
+      ]
+    },
+    "contact submissions por area of interest": {
+      "description": "Distribución de contact submissions por area of interest",
+      "sql": "SELECT area_of_interest, COUNT(*) as total FROM `cognitivedsai-herramientas.alexseis_web.contact_submissions` GROUP BY area_of_interest ORDER BY total DESC",
+      "tags": [
+        "contact submissions",
+        "distribución",
+        "area of interest"
+      ]
+    },
+    "top contact submissions": {
+      "description": "Top 10 por cantidad de contact submissions",
+      "sql": "SELECT full_name, area_of_interest, COUNT(*) as total FROM `cognitivedsai-herramientas.alexseis_web.contact_submissions` GROUP BY full_name, area_of_interest ORDER BY total DESC LIMIT 10",
+      "tags": [
+        "contact submissions",
+        "ranking",
+        "top"
+      ]
+    },
+    "resumen contact submissions": {
+      "description": "Resumen general de contact submissions",
+      "sql": "SELECT COUNT(*) as total_registros, COUNT(DISTINCT id) as id_unicos, COUNT(DISTINCT area_of_interest) as tipos_area_of_interest, COUNT(DISTINCT source_page) as tipos_source_page FROM `cognitivedsai-herramientas.alexseis_web.contact_submissions`",
+      "tags": [
+        "contact submissions",
+        "resumen",
+        "overview"
+      ]
+    },
+    "últimos conversations": {
+      "description": "Últimos registros de conversations",
+      "sql": "SELECT id, session_id, user_message, response_time_ms, agent_response, user_ip, user_agent, model_used FROM `cognitivedsai-herramientas.alexseis_web.conversations` ORDER BY user_message DESC LIMIT 50",
+      "tags": [
+        "conversations",
+        "recientes"
+      ]
+    },
+    "resumen conversations": {
+      "description": "Resumen general de conversations",
+      "sql": "SELECT COUNT(*) as total_registros, COUNT(DISTINCT id) as id_unicos, SUM(tokens_used) as total_tokens_used, AVG(tokens_used) as promedio_tokens_used FROM `cognitivedsai-herramientas.alexseis_web.conversations`",
+      "tags": [
+        "conversations",
+        "resumen",
+        "overview"
+      ]
+    }
+  },
+  "tableAliases": {
+    "camaras": "Seguridad_data.Camaras",
+    "seleccion": "Seguridad_data.Seleccion",
+    "tolerancia": "Seguridad_data.Tolerancia",
+    "eventoszai": "Seguridad_data.eventoszai",
+    "vehiculos": "Seguridad_data.vehiculos",
+    "contact submissions": "alexseis_web.contact_submissions",
+    "contact_submissions": "alexseis_web.contact_submissions",
+    "conversations": "alexseis_web.conversations"
+  },
+  "columnAliases": {},
+  "keyColumns": {
+    "Seleccion": [
+      "candidato"
+    ],
+    "Tolerancia": [
+      "id_turno",
+      "peso_salida"
+    ],
+    "eventoszai": [
+      "id_evento"
+    ],
+    "vehiculos": [
+      "id_persona",
+      "id_turno",
+      "especialidad",
+      "peso_salida",
+      "observacion_salida"
+    ],
+    "contact_submissions": [
+      "id"
+    ],
+    "conversations": [
+      "id",
+      "session_id"
+    ]
+  },
+  "commonFilters": {
+    "este año": "EXTRACT(YEAR FROM CURRENT_DATE())",
+    "este mes": "EXTRACT(MONTH FROM CURRENT_DATE())"
+  },
+  "dateColumns": {
+    "Camaras": "dias_almac",
+    "Seleccion": "fecha_inicio",
+    "Tolerancia": "fecha",
+    "eventoszai": "fecha",
+    "vehiculos": "fecha_turno_desde",
+    "contact_submissions": "message",
+    "conversations": "user_message"
+  }
+}
